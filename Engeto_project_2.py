@@ -1,5 +1,5 @@
 """
-projekt_1.py: první projekt do Engeto Online Python Akademie
+projekt_2.py: druhý projekt do Engeto Online Python Akademie
 author: Václav Holub
 email: vaclavholub5@seznam.cz
 discord: .avalok
@@ -10,13 +10,12 @@ from random import randint
 
 
 # functions
-def main():
-    welcome_message()
-    game_loop()
-
-
 def duplicate_detector(number, sequence):
     return True if number in sequence else False
+
+
+def sep_print():
+    return "-" * 47
 
 
 def game_number_generator():
@@ -35,33 +34,52 @@ def game_number_generator():
 
 
 def welcome_message():
-    sep = "-" * 47
     print(
         f"""Hi there!
-    {sep}
-    I've generated a random 4 digit number for you.
-    Let's play a bulls and cows game.
-    {sep}"""
+{sep_print()}
+I've generated a random 4 digit number for you.
+Let's play a bulls and cows game.
+{sep_print()}"""
     )
 
 
 def user_number_input():
     while True:
-        guessed_number = input("Enter a number: ")
+        user_number = input("Enter a number: ")
         if (
-            len(guessed_number) > 4
-            or len(set(guessed_number)) < 4
-            or guessed_number[0] == "0"
-            or not guessed_number.isnumeric()
+            len(user_number) > 4
+            or len(set(user_number)) < 4
+            or user_number[0] == "0"
+            or not user_number.isnumeric()
         ):
             print("Invalid number, please try again.")
             continue
         else:
-            return guessed_number
+            user_number_list = []
+            for i in user_number:
+                user_number_list.append(int(i))
+            return user_number_list
 
 
-def game_loop():
-    ...
+def cows_bulls_evaulation():
+    random_number = [1, 2, 3, 4]
+    user_number = user_number_input()
+    bulls = 0
+    cows = 0
+    for i in random_number:
+        if i in user_number and random_number.index(i) == user_number.index(i):
+            bulls += 1
+        elif i in user_number and random_number.index(i) != user_number.index(i):
+            cows += 1
+    return bulls, cows
+
+
+def main():
+    welcome_message()
+    cows_bulls_evaulation()
+
+
+print(cows_bulls_evaulation())
 
 
 # tests of functions
@@ -78,4 +96,4 @@ def test_game_number_generator():
 
 # main execution
 if __name__ == "__main__":
-    main()
+    ...

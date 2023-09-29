@@ -75,34 +75,39 @@ Let's play a bulls and cows game.
 
 def main():
     welcome_message()
-    random_number = game_number_generator()
-    guesses = 0
     while True:
-        bulls_cows = cows_bulls_evaulation(random_number)
-        bulls = bulls_cows[0]
-        cows = bulls_cows[1]
-        if bulls != 4:
-            if bulls == 1 and cows == 1:
-                print(f"{bulls} bull, {cows} cow\n{sep_print()}")
-            elif bulls != 1 and cows != 1:
-                print(f"{bulls} bulls, {cows} cows\n{sep_print()}")
-            elif bulls == 1 and cows != 1:
-                print(f"{bulls} bull, {cows} cows\n{sep_print()}")
-            elif bulls != 1 and cows == 1:
-                print(f"{bulls} bulls, {cows} cow\n{sep_print()}")
-        else:
-            guesses += 1
-            if guesses == 1:
-                print(
-                    f"""Correct, you've guessed the right number in {guesses} guess\n{sep_print()}!"""
-                )
+        random_number = game_number_generator()
+        guesses = 0
+        while True:
+            bulls_cows = cows_bulls_evaulation(random_number)
+            bulls = bulls_cows[0]
+            cows = bulls_cows[1]
+            if bulls != 4:
+                if bulls == 1 and cows == 1:
+                    print(f"{bulls} bull, {cows} cow\n{sep_print()}")
+                elif bulls != 1 and cows != 1:
+                    print(f"{bulls} bulls, {cows} cows\n{sep_print()}")
+                elif bulls == 1 and cows != 1:
+                    print(f"{bulls} bull, {cows} cows\n{sep_print()}")
+                elif bulls != 1 and cows == 1:
+                    print(f"{bulls} bulls, {cows} cow\n{sep_print()}")
             else:
-                print(
-                    f"""Correct, you've guessed the right number in {guesses} guesses\n{sep_print()}!"""
-                )
+                guesses += 1
+                if guesses == 1:
+                    print(
+                        f"""Correct, you've guessed the right number in {guesses} guess\n{sep_print()}!"""
+                    )
+                else:
+                    print(
+                        f"""Correct, you've guessed the right number in {guesses} guesses\n{sep_print()}!"""
+                    )
+                break
+            guesses += 1
+            continue
+        if input('Write "Y" to play again or anything else to exit the game: ') == "Y":
+            continue
+        else:
             break
-        guesses += 1
-        continue
 
 
 # main execution

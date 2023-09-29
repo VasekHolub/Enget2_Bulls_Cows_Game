@@ -61,8 +61,7 @@ def user_number_input():
             return user_number_list
 
 
-def cows_bulls_evaulation():
-    random_number = [1, 2, 3, 4]
+def cows_bulls_evaulation(random_number):
     user_number = user_number_input()
     bulls = 0
     cows = 0
@@ -76,10 +75,34 @@ def cows_bulls_evaulation():
 
 def main():
     welcome_message()
-    cows_bulls_evaulation()
-
-
-print(cows_bulls_evaulation())
+    random_number = game_number_generator()
+    guesses = 0
+    while True:
+        bulls_cows = cows_bulls_evaulation(random_number)
+        bulls = bulls_cows[0]
+        cows = bulls_cows[1]
+        if bulls != 4:
+            if bulls == 1 and cows == 1:
+                print(f"""{bulls} bull, {cows} cow""")
+            elif bulls != 1 and cows != 1:
+                print(f"""{bulls} bulls, {cows} cows""")
+            elif bulls == 1 and cows != 1:
+                print(f"""{bulls} bull, {cows} cows""")
+            elif bulls != 1 and cows == 1:
+                print(f"""{bulls} bulls, {cows} cow""")
+        else:
+            guesses += 1
+            if guesses == 1:
+                print(
+                    f"""Correct, you've guessed the right number in {guesses} guess!"""
+                )
+            else:
+                print(
+                    f"""Correct, you've guessed the right number in {guesses} guesses!"""
+                )
+            break
+        guesses += 1
+        continue
 
 
 # tests of functions
@@ -96,4 +119,4 @@ def test_game_number_generator():
 
 # main execution
 if __name__ == "__main__":
-    ...
+    main()

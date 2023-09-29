@@ -33,16 +33,6 @@ def game_number_generator():
     return random_number_sequence
 
 
-def welcome_message():
-    print(
-        f"""Hi there!
-{sep_print()}
-I've generated a random 4 digit number for you.
-Let's play a bulls and cows game.
-{sep_print()}"""
-    )
-
-
 def user_number_input():
     while True:
         user_number = input("Enter a number: ")
@@ -73,6 +63,16 @@ def cows_bulls_evaulation(random_number):
     return bulls, cows
 
 
+def welcome_message():
+    print(
+        f"""Hi there!
+{sep_print()}
+I've generated a random 4 digit number for you.
+Let's play a bulls and cows game.
+{sep_print()}"""
+    )
+
+
 def main():
     welcome_message()
     random_number = game_number_generator()
@@ -83,38 +83,26 @@ def main():
         cows = bulls_cows[1]
         if bulls != 4:
             if bulls == 1 and cows == 1:
-                print(f"""{bulls} bull, {cows} cow""")
+                print(f"{bulls} bull, {cows} cow\n{sep_print()}")
             elif bulls != 1 and cows != 1:
-                print(f"""{bulls} bulls, {cows} cows""")
+                print(f"{bulls} bulls, {cows} cows\n{sep_print()}")
             elif bulls == 1 and cows != 1:
-                print(f"""{bulls} bull, {cows} cows""")
+                print(f"{bulls} bull, {cows} cows\n{sep_print()}")
             elif bulls != 1 and cows == 1:
-                print(f"""{bulls} bulls, {cows} cow""")
+                print(f"{bulls} bulls, {cows} cow\n{sep_print()}")
         else:
             guesses += 1
             if guesses == 1:
                 print(
-                    f"""Correct, you've guessed the right number in {guesses} guess!"""
+                    f"""Correct, you've guessed the right number in {guesses} guess\n{sep_print()}!"""
                 )
             else:
                 print(
-                    f"""Correct, you've guessed the right number in {guesses} guesses!"""
+                    f"""Correct, you've guessed the right number in {guesses} guesses\n{sep_print()}!"""
                 )
             break
         guesses += 1
         continue
-
-
-# tests of functions
-def test_game_number_generator():
-    Error_count = 0
-    i = 1000
-    while i > 0:
-        test_sequence = game_number_generator()
-        if test_sequence[0] == 0 or len(set(test_sequence)) != 4:
-            Error_count += 1
-        i -= 1
-    return print("Number of errors =", Error_count)
 
 
 # main execution

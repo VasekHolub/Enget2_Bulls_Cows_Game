@@ -8,11 +8,13 @@ discord: .avalok
 # imports
 from random import randint
 
-# variables
-sep = "-" * 47
-
 
 # functions
+def main():
+    welcome_message()
+    game_loop()
+
+
 def duplicate_detector(number, sequence):
     return True if number in sequence else False
 
@@ -32,6 +34,36 @@ def game_number_generator():
     return random_number_sequence
 
 
+def welcome_message():
+    sep = "-" * 47
+    print(
+        f"""Hi there!
+    {sep}
+    I've generated a random 4 digit number for you.
+    Let's play a bulls and cows game.
+    {sep}"""
+    )
+
+
+def user_number_input():
+    while True:
+        guessed_number = input("Enter a number: ")
+        if (
+            len(guessed_number) > 4
+            or len(set(guessed_number)) < 4
+            or guessed_number[0] == "0"
+            or not guessed_number.isnumeric()
+        ):
+            print("Invalid number, please try again.")
+            continue
+        else:
+            return guessed_number
+
+
+def game_loop():
+    ...
+
+
 # tests of functions
 def test_game_number_generator():
     Error_count = 0
@@ -44,11 +76,6 @@ def test_game_number_generator():
     return print("Number of errors =", Error_count)
 
 
-# game introduction
-print(
-    f"""Hi there!
-{sep}
-I've generated a random 4 digit number for you.
-{sep}"""
-)
-input("Enter a number: ")
+# main execution
+if __name__ == "__main__":
+    main()

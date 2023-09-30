@@ -63,6 +63,39 @@ def cows_bulls_evaulation(random_number):
     return bulls, cows
 
 
+def bulls_cows_logger(bulls, cows):
+    if bulls == 1 and cows == 1:
+        print(f"{bulls} bull, {cows} cow\n{sep_print()}")
+    elif bulls != 1 and cows != 1:
+        print(f"{bulls} bulls, {cows} cows\n{sep_print()}")
+    elif bulls == 1 and cows != 1:
+        print(f"{bulls} bull, {cows} cows\n{sep_print()}")
+    elif bulls != 1 and cows == 1:
+        print(f"{bulls} bulls, {cows} cow\n{sep_print()}")
+
+
+def results_logger(guesses):
+    if guesses == 1:
+        print(
+            f"""Correct, you've guessed the right number in 1 guess!\n{sep_print()}\nYou must have gotten lucky!\n{sep_print()}"""
+        )
+    else:
+        performance = ""
+    if guesses <= 5:
+        performance = "amazing"
+    elif guesses <= 10:
+        performance = "great"
+    elif guesses <= 20:
+        performance = "pretty good"
+    elif guesses <= 30:
+        performance = "could be better"
+    elif guesses > 30:
+        performance = "not great"
+    print(
+        f"""Correct, you've guessed the right number in {guesses} guesses!\n{sep_print()}\nThat's {performance}!\n{sep_print()}"""
+    )
+
+
 def welcome_message():
     print(
         f"""Hi there!
@@ -84,35 +117,10 @@ def main():
             bulls = bulls_cows[0]
             cows = bulls_cows[1]
             if bulls != 4:
-                if bulls == 1 and cows == 1:
-                    print(f"{bulls} bull, {cows} cow\n{sep_print()}")
-                elif bulls != 1 and cows != 1:
-                    print(f"{bulls} bulls, {cows} cows\n{sep_print()}")
-                elif bulls == 1 and cows != 1:
-                    print(f"{bulls} bull, {cows} cows\n{sep_print()}")
-                elif bulls != 1 and cows == 1:
-                    print(f"{bulls} bulls, {cows} cow\n{sep_print()}")
+                bulls_cows_logger(bulls, cows)
             else:
                 guesses += 1
-                if guesses == 1:
-                    print(
-                        f"""Correct, you've guessed the right number in 1 guess!\n{sep_print()}\nYou must have gotten lucky!\n{sep_print()}"""
-                    )
-                else:
-                    performance = ""
-                    if guesses <= 5:
-                        performance = "amazing"
-                    elif guesses <= 10:
-                        performance = "great"
-                    elif guesses <= 20:
-                        performance = "pretty good"
-                    elif guesses <= 30:
-                        performance = "not great"
-                    elif guesses > 30:
-                        performance = "bad"
-                    print(
-                        f"""Correct, you've guessed the right number in {guesses} guesses!\n{sep_print()}\nThat's {performance}!\n{sep_print()}"""
-                    )
+                results_logger(guesses)
                 break
             guesses += 1
             continue

@@ -15,7 +15,7 @@ def duplicate_detector(number, sequence):
 
 
 def sep_print():
-    return "-" * 47
+    return "-" * 53
 
 
 def game_number_generator():
@@ -69,6 +69,7 @@ def welcome_message():
 {sep_print()}
 I've generated a random 4 digit number for you.
 Let's play a bulls and cows game.
+Enter a four digit number that doesn't start\nwith zero and is compoused of unique numbers. 
 {sep_print()}"""
     )
 
@@ -95,21 +96,32 @@ def main():
                 guesses += 1
                 if guesses == 1:
                     print(
-                        f"""Correct, you've guessed the right number in {guesses} guess\n{sep_print()}!"""
+                        f"""Correct, you've guessed the right number in 1 guess!\n{sep_print()}\nYou must have gotten lucky!\n{sep_print()}"""
                     )
                 else:
+                    performance = ""
+                    if guesses <= 5:
+                        performance = "amazing"
+                    elif guesses <= 10:
+                        performance = "great"
+                    elif guesses <= 20:
+                        performance = "pretty good"
+                    elif guesses <= 30:
+                        performance = "not great"
+                    elif guesses > 30:
+                        performance = "bad"
                     print(
-                        f"""Correct, you've guessed the right number in {guesses} guesses\n{sep_print()}!"""
+                        f"""Correct, you've guessed the right number in {guesses} guesses!\n{sep_print()}\nThat's {performance}!\n{sep_print()}"""
                     )
                 break
             guesses += 1
             continue
-        if input('Write "Y" to play again or anything else to exit the game: ') == "Y":
+        if input('Write "y" to play again or anything else to exit the game: ') == "y":
             continue
         else:
             break
 
 
-# main execution
+# main function execution
 if __name__ == "__main__":
     main()

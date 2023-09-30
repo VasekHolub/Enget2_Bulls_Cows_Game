@@ -42,7 +42,7 @@ def user_number_input():
             or user_number[0] == "0"
             or not user_number.isnumeric()
         ):
-            print("Invalid number, please try again.")
+            print(f"Invalid number, please try again.\n{sep_print()}")
             continue
         else:
             user_number_list = []
@@ -81,19 +81,33 @@ def results_logger(guesses):
         )
     else:
         performance = ""
-    if guesses <= 5:
-        performance = "amazing"
-    elif guesses <= 10:
-        performance = "great"
-    elif guesses <= 20:
-        performance = "pretty good"
-    elif guesses <= 30:
-        performance = "could be better"
-    elif guesses > 30:
-        performance = "not great"
-    print(
-        f"""Correct, you've guessed the right number in {guesses} guesses!\n{sep_print()}\nThat's {performance}!\n{sep_print()}"""
-    )
+        if guesses <= 5:
+            performance = "amazing"
+        elif guesses <= 10:
+            performance = "great"
+        elif guesses <= 20:
+            performance = "pretty good"
+        elif guesses <= 30:
+            performance = "not great"
+        elif guesses > 30:
+            performance = "bad"
+        print(
+            f"""Correct, you've guessed the right number in {guesses} guesses!\n{sep_print()}\nThat's {performance}!\n{sep_print()}"""
+        )
+
+
+def game_stats_logger(game_scores):
+    sorted_values = sorted(game_scores.values(), reverse=False)
+    sorted_dict = dict()
+    for i in sorted_values:
+        for k in game_scores.keys():
+            if game_scores[k] == i:
+                sorted_dict[k] = game_scores[k]
+    for key, value in sorted_dict.items():
+        if value == 1:
+            print(f"Game {key}: {value} guess")
+        else:
+            print(f"Game {key}: {value} guesses")
 
 
 def welcome_message():
@@ -108,6 +122,8 @@ Enter a four digit number that doesn't start\nwith zero and is compoused of uniq
 
 
 def main():
+    game_number = 0
+    game_scores = dict()
     welcome_message()
     while True:
         random_number = game_number_generator()
@@ -119,13 +135,27 @@ def main():
             if bulls != 4:
                 bulls_cows_logger(bulls, cows)
             else:
+                game_number += 1
                 guesses += 1
+                game_scores[str(game_number)] = guesses
                 results_logger(guesses)
                 break
             guesses += 1
             continue
-        if input('Write "y" to play again or anything else to exit the game: ') == "y":
+        user_input = input(
+            'Type "y" to play again, "s" to show game statistics\nof your best games or anything else to exit the game: '
+        )
+        if user_input == "y":
             continue
+        elif user_input == "s":
+            game_stats_logger(game_scores)
+            if (
+                input('Type "y" to play again or anything else to exit the game: ')
+                == "y"
+            ):
+                continue
+            else:
+                break
         else:
             break
 

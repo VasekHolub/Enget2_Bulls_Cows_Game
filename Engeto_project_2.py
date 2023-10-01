@@ -14,6 +14,12 @@ def sep_print():
     return "-" * 55
 
 
+def welcome_message():
+    print(
+        f"Hi there!\n{sep_print()}\nI've generated a random 4 digit number for you.\nLet's play a bulls and cows game!\nEnter a four digit number that doesn't start\nwith zero and is compoused of unique numbers.\n{sep_print()}"
+    )
+
+
 def game_number_generator():
     random_number_sequence = []
     i = 4
@@ -116,12 +122,6 @@ def sorted_game_stats_logger(game_scores: dict):
             print(f"Game {key}: {value} guess")
         else:
             print(f"Game {key}: {value} guesses")
-
-
-def welcome_message():
-    print(
-        f"Hi there!\n{sep_print()}\nI've generated a random 4 digit number for you.\nLet's play a bulls and cows game!\nEnter a four digit number that doesn't start\nwith zero and is compoused of unique numbers.\n{sep_print()}"
-    )
 
 
 def main():

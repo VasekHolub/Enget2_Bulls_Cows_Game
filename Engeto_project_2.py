@@ -16,7 +16,14 @@ def sep_print():
 
 def welcome_message():
     print(
-        f"Hi there!\n{sep_print()}\nI've generated a random 4 digit number for you.\nLet's play a bulls and cows game!\nEnter a four digit number that doesn't start\nwith zero and is compoused of unique numbers.\n{sep_print()}"
+        f"""
+Hi there!
+{sep_print()}
+I've generated a random 4 digit number for you.
+Let's play a bulls and cows game!
+Enter a four digit number that doesn't start
+with zero and is compoused of unique numbers.
+{sep_print()}"""
     )
 
 

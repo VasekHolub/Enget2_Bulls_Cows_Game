@@ -10,12 +10,8 @@ from random import randint
 
 
 # functions
-def duplicate_detector(number, sequence):
-    return True if number in sequence else False
-
-
 def sep_print():
-    return "-" * 53
+    return "-" * 55
 
 
 def game_number_generator():
@@ -23,7 +19,7 @@ def game_number_generator():
     i = 4
     while i > 0:
         random_number = randint(0, 9)
-        if duplicate_detector(random_number, random_number_sequence):
+        if random_number in random_number_sequence:
             continue
         random_number_sequence.append(random_number)
         if random_number_sequence[0] == 0:
@@ -37,7 +33,7 @@ def user_number_input():
     while True:
         user_number = input("Enter a number: ")
         if (
-            len(user_number) > 4
+            len(user_number) != 4
             or len(set(user_number)) < 4
             or user_number[0] == "0"
             or not user_number.isnumeric()
@@ -51,7 +47,7 @@ def user_number_input():
             return user_number_list
 
 
-def cows_bulls_evaulation(random_number):
+def evaluate_guess(random_number: list):
     user_number = user_number_input()
     bulls = 0
     cows = 0
@@ -63,7 +59,9 @@ def cows_bulls_evaulation(random_number):
     return bulls, cows
 
 
-def bulls_cows_logger(bulls, cows):
+def bulls_cows_logger(bulls_cows: tuple):
+    bulls = bulls_cows[0]
+    cows = bulls_cows[1]
     if bulls == 1 and cows == 1:
         print(f"{bulls} bull, {cows} cow\n{sep_print()}")
     elif bulls != 1 and cows != 1:
@@ -74,7 +72,11 @@ def bulls_cows_logger(bulls, cows):
         print(f"{bulls} bulls, {cows} cow\n{sep_print()}")
 
 
-def results_logger(guesses):
+def results_logger(guesses: int):
+    """
+    Displayes results of the game and evaluates
+    users results according to the number of guesses.
+    """
     if guesses == 1:
         print(
             f"""Correct, you've guessed the right number in 1 guess!\n{sep_print()}\nYou must have gotten lucky!\n{sep_print()}"""
@@ -96,7 +98,13 @@ def results_logger(guesses):
         )
 
 
-def game_stats_logger(game_scores):
+def sorted_game_stats_logger(game_scores: dict):
+    """
+    Functions takes the game scores dict of the number of games the user played.
+    It sorts this dict from the game with the lowest amount of guesses to the one
+    with the highest amount.
+    It then prints the sorted dict to the user.
+    """
     sorted_values = sorted(game_scores.values(), reverse=False)
     sorted_dict = dict()
     for i in sorted_values:
@@ -112,12 +120,7 @@ def game_stats_logger(game_scores):
 
 def welcome_message():
     print(
-        f"""Hi there!
-{sep_print()}
-I've generated a random 4 digit number for you.
-Let's play a bulls and cows game.
-Enter a four digit number that doesn't start\nwith zero and is compoused of unique numbers. 
-{sep_print()}"""
+        f"Hi there!\n{sep_print()}\nI've generated a random 4 digit number for you.\nLet's play a bulls and cows game!\nEnter a four digit number that doesn't start\nwith zero and is compoused of unique numbers.\n{sep_print()}"
     )
 
 
@@ -129,11 +132,9 @@ def main():
         random_number = game_number_generator()
         guesses = 0
         while True:
-            bulls_cows = cows_bulls_evaulation(random_number)
-            bulls = bulls_cows[0]
-            cows = bulls_cows[1]
-            if bulls != 4:
-                bulls_cows_logger(bulls, cows)
+            bulls_cows = evaluate_guess(random_number)
+            if bulls_cows[0] != 4:
+                bulls_cows_logger(bulls_cows)
             else:
                 game_number += 1
                 guesses += 1
@@ -145,14 +146,16 @@ def main():
         user_input = input(
             'Type "y" to play again, "s" to show game statistics\nof your best games or anything else to exit the game: '
         )
+        print(sep_print())
         if user_input == "y":
             continue
         elif user_input == "s":
-            game_stats_logger(game_scores)
+            sorted_game_stats_logger(game_scores)
             if (
-                input('Type "y" to play again or anything else to exit the game: ')
+                input('Type "y" to play again or anything else\nto exit the game: ')
                 == "y"
             ):
+                print(sep_print())
                 continue
             else:
                 break

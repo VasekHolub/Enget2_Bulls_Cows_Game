@@ -22,7 +22,7 @@ Hi there!
 I've generated a random 4 digit number for you.
 Let's play a bulls and cows game!
 Enter a four digit number that doesn't start
-with zero and is compoused of unique numbers.
+with zero and is composed of unique numbers.
 {sep_print()}"""
     )
 
